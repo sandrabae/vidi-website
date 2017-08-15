@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+    
+    <meta charset="utf-8">
+    <script src="http://code.jquery.com/jquery-3.2.1.js">
+    </script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/4.2.0/masonry.pkgd.js">
+    </script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <style media="screen">
+
+    #body {
+    padding-left: 50px;
+    padding-right: 50px;
+    background-color: white;
+    }
+
+        #h_nav{
+    margin-top:0px;
+    font-size: 0.85em;
+    color: #484941;
+    }
+
+    #h_logo{
+    float:left;
+    margin-top:10px;
+    margin-right:30px;
+    }
+
+    #h_logo_v4{
+        float:left;
+        margin-top:10px;
+    }
+
+    #h_navlink_v4 {
+    padding-top: 50px;
+    padding-left: 60px;
+    }
+
+
+
+    #h_navlink a{
+    text-decoration:none;
+    background-image:url(/images/module/tab_grey.gif);
+    background-position:left;
+    background-repeat:no-repeat;
+    padding-left:15px;
+    padding-right: 22px;
+    }
+    #h_navlink a:hover{
+    color:#c46728;
+    text-decoration:underline;
+    background-image:url(/images/module/tab_orange.gif);
+    background-repeat:no-repeat;
+    }
+
+    #h_navlink_v4 a{
+    color: #484941;
+        text-decoration:none;
+        background-image:url(/images/module/tab_grey.gif);
+        background-position:left;
+        background-repeat:no-repeat;
+        padding-left:15px;
+    font-size: 15px;
+    font-family: Lato, sans-serif;
+    }
+    #h_navlink_v4 a:hover{
+        color:#c46728;
+        text-decoration:none;
+        background-image:url(/images/module/tab_orange.gif);
+        background-repeat:no-repeat;
+    }
+
+        .wrapper{
+            padding-top: 15px;
+
+        }
+        .{
+    
+            padding-left: 15px;
+        }
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: sans-serif;
+        }
+        /* ---- grid ---- */
+
+        .grid {
+            background: #EEE;
+            max-width: 795px;
+            margin: auto;
+            margin-top: 35px;
+        }
+        /* clearfix */
+
+        .grid:after {
+            content: '';
+            display: block;
+            clear: both;
+        }
+        /* ---- grid-item ---- */
+
+        .grid-item {
+            width: 265px;
+            height: 270px;
+            float: left;
+            background: #D26;
+            border: 2px solid #333;
+            border-color: hsla(0, 0%, 0%, 0.5);
+        }
+
+        .grid-item--width2 {
+            width: 320px;
+        }
+
+        .grid-item--width3 {
+            width: 200px;
+        }
+
+        .grid-item--width4 {
+            width: 150px;
+        }
+        .grid-item--width5{
+            width: 530px;
+        }
+        .grid-item--width6 {
+            /*width: 335px;*/
+            width: 335px;
+        }
+
+
+        .grid-item--height2 {
+            height: 200px;
+        }
+
+        .grid-item--height3 {
+            height: 135px;
+        }
+
+        .grid-item--height4 {
+            height: 360px;
+        }
+        .grid-item--height5 {
+            height: 13px;
+        }
+
+
+        button {
+            font-size: 20px;
+        }
+    </style>
+    <div class="container" id="body">
+        <div class="row wrapper">
+            <div class="col-lg-12">
+                <!--begin naviga tion-->
+                <div class="col-3 col-sm-3 col-md-3 col-lg-3" id="h_logo_v4">
+                    <!--logo -->
+                    <a href="/"><img alt="VIDI Home" class="adjust-img" height="80" src="../img/vidi2013_logo.png" width="160"></a>
+                </div>
+                <div class="col-9 col-sm-9 col-md-9 col-lg-9" id="h_navlink_v4">
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li class="nav-item"></li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/people">People</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/research">Research</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/publications">Publications</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="//vis.cs.ucdavis.edu/Gallery">Gallery</a>
+                        </li><!--//vis.cs.ucdavis.edu/Gallery -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="/about">About</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div><!-- end navigation, #header -->
+        <div class="wrapper" id="navigation">
+            <div class="grid">
+                <div id="container"></div>     
+            </div>
+            <p><button class="append-button">Append new items</button></p>
+        </div>
+    </div>
+    <script type="text/javascript">
+    $(document).ready(function() {
+        // external js: masonry.pkgd.js
+
+        var $grid = $('.grid').masonry({
+            columnWidth: 265,
+            itemSelector: '.grid-item'
+        });
+
+        $('.append-button').on('click', function() {
+            var elems = [getItemElement(), getItemElement(), getItemElement()];
+            // make jQuery object
+            var $elems = $(elems);
+            $grid.append($elems).masonry('appended', $elems);
+        });
+
+        // create <div class="grid-item"><\/div>
+        function getItemElement() {
+            var elem = document.createElement('div');
+            var wRand = Math.random();
+            var hRand = Math.random();
+            var widthClass = wRand > 0.8 ? 'grid-item--width3' : wRand > 0.6 ? 'grid-item--width2' : '';
+            var heightClass = hRand > 0.85 ? 'grid-item--height4' : hRand > 0.6 ? 'grid-item--height3' : hRand > 0.35 ? 'grid-item--height2' : '';
+            elem.className = 'grid-item ' + widthClass + ' ' + heightClass;
+            return elem;
+        }
+
+    })
+    </script>
+</body>
+</html>
